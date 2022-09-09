@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <!-- <form onsubmit="doSum(); return false;">
+        <label for="">Enter Number 1:  <br><input type="number"  id="num1"></label><br>
+        <label for="">Operator <br><input type="text"  id="oper"></label><br>
+
+        <label for="">Enter Number 2: <br><input type="number"  id="num2"></label><br>
+        <button type="submit">submit</button>
+
+        <h3 id="result"></h3> -->
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <br><br><br>
+    <!-- <h1>CHECK VALUE EVEN OR ODD</h1>
+<div class="center">
+    <form onsubmit="Even(); return false;" >
+        <label >Enter Number For CHECK:  <br><input type="number"  id="num3"></label><br>
+    <button type="submit">Check</button>
+    <h3 id="result1"></h3>
+
+    </form>
+</div> -->
+
+   <div class="center">
+    <form onsubmit="Weather(); return false;">
+        <label>Enter Number For CHECK: <br><input type="text" id="city"></label><br>
+        <button type="submit">Check</button>
+        <h3 id="results"></h3>
+
+    </form>
+   </div>
+
+    <script>
+
+        function Weather() {
+            let city = document.querySelector('#city').value
+           // document.querySelector('#results').innerHTML = city
+            axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e0f99c494c2ce394a18cc2fd3f100543&units=metric`)
+           // axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=fc01c173f257e8b5b606f8771a1e900d`)
+                .then(function (response) {
+            document.querySelector('#results').innerHTML = `Temperature Of ${city} is :  ${response.data['main']['temp']} C`
+
+                     console.log(response.data) 
+                    }).catch(function(error){
+                        console.log(error)
+                    })
+
+        }
+
+
+        let userInput = 25;
+
+
+
+        function doSum() {
+            let num1 = +document.querySelector('#num1').value
+            let num2 = +document.querySelector('#num2').value
+            let oper = document.querySelector('#oper').value
+            let resultElement = document.querySelector("#result")
+
+            if (oper === '+') {
+                resultElement.innerHTML = num1 + num2;
+            } else if (oper === '-') {
+                resultElement.innerHTML = num1 - num2;
+            } else if (oper === '*') {
+                resultElement.innerHTML = num1 * num2;
+            } else if (oper === '/') {
+                if (num2 != 0) {
+                    resultElement.innerHTML = num1 / num2;
+                } else {
+                    resultElement.innerHTML = "Math Error();"
+                }
+
+            } else {
+                resultElement.innerHTML = "Error"
+            }
+        }
+
+
+
+        function Even() {
+            let num3 = +document.querySelector('#num3').value
+            let result1 = document.querySelector('#result1')
+            if (num3 % 2 == 0) {
+                result1.innerHTML = "Even"
+            } else {
+                result1.innerHTML = "Odd"
+            }
+        }
+
+    </script>
+
+    </form>
+</body>
+
+</html>
